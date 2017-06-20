@@ -9,10 +9,13 @@ function filtrerSommaire(filtre, realisationChoix) {
             integraleRealisationElts[i].style.display = "block";
         }
         //supprime les éléments ne faisant pas partie de la catégorie sélectionnée
-        var excludedElts = realisationsElts.querySelectorAll("div:not(." + realisationChoix + ")"); 
-        for (i = 0; i < excludedElts.length; i++) {
-            excludedElts[i].style.display = "none";
+        if (filtre !== "filtreTout") {
+            var excludedElts = realisationsElts.querySelectorAll("div:not(." + realisationChoix + ")"); 
+            for (i = 0; i < excludedElts.length; i++) {
+                excludedElts[i].style.display = "none";
+            }
         }
+        
         //affiche systématiquement le texte de présentation des réalisations
         var texteRealisationsElts = document.querySelectorAll(".texteRealisation");
         for (j = 0; j < texteRealisationsElts.length; j++) {
@@ -26,13 +29,4 @@ filtrerSommaire("filtreDessin", "dessin");
 filtrerSommaire("filtreInstallation", "installation");
 filtrerSommaire("filtreSculpture", "sculpture");
 filtrerSommaire("filtreLivret", "livret");
-
-//Gestionnaire d'événement pour l'affichage de toutes les réalisations
-var filtreToutElt = document.getElementById("filtreTout");
-filtreToutElt.addEventListener("click", function() {
-    var realisationsElts = document.getElementById("realisations");
-    var integraleRealisationElts = realisationsElts.querySelectorAll(".realisations, .realisation, .exposition, .dessin, .installation, .sculpture, .livret");
-    for (i = 0; i < integraleRealisationElts.length; i ++) {
-        integraleRealisationElts[i].style.display = "block";
-    }
-});
+filtrerSommaire("filtreTout", "");
